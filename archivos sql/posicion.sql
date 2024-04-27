@@ -1,0 +1,18 @@
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (1, 'Arquero', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (2, 'Lateral derecho', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (3, 'Defensa central', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (4, 'Lateral izquierdo', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (5, 'Volante central', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (6, 'Lateral volante derecho', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (7, 'Lateral Volante izquierdo', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (8, 'Volante derecho', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (9, 'Volante izquierdo', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (10, 'Volante ofensivo', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (11, 'Extremo derecho', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (12, 'Extremo izquierdo', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (13, 'Delantero centro', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (14, 'Volante interior', 'Específica');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (15, 'Lateral', 'General');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (16, 'Mediocampista', 'General');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (17, 'Delantero', 'General');
+INSERT INTO posicion (id_posicion, nombre, tipo)             VALUES (18, 'Defensa', 'General');

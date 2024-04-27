@@ -1,0 +1,16 @@
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (1, 'Masculino', 'PEM');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (2, 'Masculino', 'SUB-20');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (3, 'Masculino', 'SUB-17');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (4, 'Masculino', 'SUB-16');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (5, 'Masculino', 'SUB-15');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (6, 'Masculino', 'SUB-14');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (7, 'Masculino', 'SUB-13');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (8, 'Masculino', 'SUB-12');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (9, 'Masculino', 'SUB-11');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (10, 'Masculino', 'SUB-10');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (11, 'Masculino', 'SUB-9');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (12, 'Masculino', 'SUB-8');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (13, 'Femenino', 'PEF');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (14, 'Femenino', 'SUB-19 F');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (15, 'Femenino', 'SUB-16 F');
+INSERT INTO categoria (id_categoria, genero, nombre)             VALUES (16, 'Masculino', 'SUB-18');
