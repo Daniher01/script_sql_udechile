@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from querys.jugador import convertir_csv_a_sql_jugador
 
 if __name__ == "__main__":
