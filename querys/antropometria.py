@@ -8,9 +8,9 @@ def convertir_csv_a_sql_antropometria():
     
     input_path = 'archivos csv/Antropometria.csv'
     output_path = 'archivos sql/antropometria.sql'
-    separador = ','
+    separador = ','# Detectar la codificación del archivo
     
-    df = pd.read_csv(input_path, sep=separador, decimal=',')
+    df = pd.read_csv(input_path, sep=separador, decimal='.', encoding='ISO-8859-1')
     
     # Convertir fechas al formato adecuado, manejando NaN
     df['FechaEvaluacion'] = df['FechaEvaluacion'].apply(
@@ -23,6 +23,10 @@ def convertir_csv_a_sql_antropometria():
     lista_query = []
     
     for i in df.index:
+        
+        if pd.isna(df['IdEvaluacion'][i]):
+            print(f"Advertencia: IdEvaluacion es nulo en la fila {i}. Saltando esta fila.")
+            continue  # Saltar la fila si IdEvaluacion es nulo
         
         def safe_string_convert(value):
             if value is None or pd.isna(value):
@@ -108,8 +112,8 @@ def convertir_csv_a_sql_antropometria():
 {safe_float_convert(df['MasaOseaPer'][i])},
 {safe_float_convert(df['IMO'][i])},
 {safe_float_convert(df['IAM'][i])},
-{safe_string_convert(df['ObjetivoEspecifico'][i])},
 {safe_string_convert(df['ObjetivoGeneral'][i])},
+{safe_float_convert(df['ObjetivoEspecifico'][i])},
 {safe_string_convert(df['Comentarios'][i])})
 
         ON CONFLICT (id_evaluacion) DO UPDATE
