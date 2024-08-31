@@ -1,2 +1,2 @@
-archivos csv/*
-archivos sql/*
+archivos csv/*.csv
+archivos sql/*.sql
