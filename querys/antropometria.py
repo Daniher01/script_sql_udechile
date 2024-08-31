@@ -68,61 +68,61 @@ def convertir_csv_a_sql_antropometria():
             masa_muscular_kg, masa_muscular_per, masa_residual_kg, masa_residual_per,
             masa_osea_kg, masa_osea_per, imo, iam, objetivo_general, objetivo_especifico, comentarios
         )
-        VALUES (
+        SELECT
             {safe_int_convert(df['IdEvaluacion'][i])},
-{'NULL' if df['FechaEvaluacion'][i] is None else f"'{df['FechaEvaluacion'][i]}'"},
-{safe_int_convert(df['IdJugador'][i])},
-{safe_int_convert(df['IdPosicion'][i])},
-{safe_float_convert(df['PesoBrutoKg'][i])},
-{safe_float_convert(df['TallaCorporalCm'][i])},
-{safe_float_convert(df['TallaSentadoCM'][i])},
-{safe_float_convert(df['DiametroBiacromial'][i])},
-{safe_float_convert(df['DiametroToraxTransverso'][i])},
-{safe_float_convert(df['DiametroToraxAnteroPosterior'][i])},
-{safe_float_convert(df['DiametroBi-iliocrestideo'][i])},
-{safe_float_convert(df['DiametroHumeralBiepicondilar'][i])},
-{safe_float_convert(df['DiametroFemoralBiepicondilar'][i])},
-{safe_float_convert(df['PerimetroCabeza'][i])},
-{safe_float_convert(df['PerimetroBrazoRelajado'][i])},
-{safe_float_convert(df['PerimetroBrazoFlexionadoEnTension'][i])},
-{safe_float_convert(df['PerimetroAntebrazoMaximo'][i])},
-{safe_float_convert(df['PerimetroToraxMesoesternal'][i])},
-{safe_float_convert(df['PerimetroCinturaMinima'][i])},
-{safe_float_convert(df['PerimetroCaderaMaximo'][i])},
-{safe_float_convert(df['PerimetroMusloMaximo'][i])},
-{safe_float_convert(df['PerimetroMusloMedial'][i])},
-{safe_float_convert(df['PerimetroPantorrillaMaxima'][i])},
-{safe_float_convert(df['PlieguesTriceps'][i])},
-{safe_float_convert(df['PlieguesSubescapular'][i])},
-{safe_float_convert(df['PlieguesSupraespinal'][i])},
-{safe_float_convert(df['PlieguesAbdominal'][i])},
-{safe_float_convert(df['PlieguesMusloMedial'][i])},
-{safe_float_convert(df['PlieguesPantorrilla'][i])},
-{safe_float_convert(df['Bicipital'][i])},
-{safe_float_convert(df['Supracrestideo'][i])},
-{safe_float_convert(df['Sumatoria 6 pliegues'][i])},
-{safe_float_convert(df['Sumatoria 8 pliegues'][i])},
-{safe_float_convert(df['MasaPielKg'][i])},
-{safe_float_convert(df['MasaPielPer'][i])},
-{safe_float_convert(df['MasaAdiposaKg'][i])},
-{safe_float_convert(df['MasaAdiposaPer'][i])},
-{safe_float_convert(df['MasaMuscularKg'][i])},
-{safe_float_convert(df['MasaMuscularPer'][i])},
-{safe_float_convert(df['MasaResidualKg'][i])},
-{safe_float_convert(df['MasaResidualPer'][i])},
-{safe_float_convert(df['MasaOseaKg'][i])},
-{safe_float_convert(df['MasaOseaPer'][i])},
-{safe_float_convert(df['IMO'][i])},
-{safe_float_convert(df['IAM'][i])},
-{safe_string_convert(df['ObjetivoGeneral'][i])},
-{safe_float_convert(df['ObjetivoEspecifico'][i])},
-{safe_string_convert(df['Comentarios'][i])})
-    WHERE EXISTS (
-        SELECT 1 FROM jugador WHERE id_jugador = {safe_int_convert(df['IdJugador'][i])}
-    )           
-    AND EXISTS (
-        SELECT 1 FROM posicion WHERE id_posicion = {safe_int_convert(df['IdPosicion'][i])}
-    )
+            {'NULL' if df['FechaEvaluacion'][i] is None else f"'{df['FechaEvaluacion'][i]}'"},
+            {safe_int_convert(df['IdJugador'][i])},
+            {safe_int_convert(df['IdPosicion'][i])},
+            {safe_float_convert(df['PesoBrutoKg'][i])},
+            {safe_float_convert(df['TallaCorporalCm'][i])},
+            {safe_float_convert(df['TallaSentadoCM'][i])},
+            {safe_float_convert(df['DiametroBiacromial'][i])},
+            {safe_float_convert(df['DiametroToraxTransverso'][i])},
+            {safe_float_convert(df['DiametroToraxAnteroPosterior'][i])},
+            {safe_float_convert(df['DiametroBi-iliocrestideo'][i])},
+            {safe_float_convert(df['DiametroHumeralBiepicondilar'][i])},
+            {safe_float_convert(df['DiametroFemoralBiepicondilar'][i])},
+            {safe_float_convert(df['PerimetroCabeza'][i])},
+            {safe_float_convert(df['PerimetroBrazoRelajado'][i])},
+            {safe_float_convert(df['PerimetroBrazoFlexionadoEnTension'][i])},
+            {safe_float_convert(df['PerimetroAntebrazoMaximo'][i])},
+            {safe_float_convert(df['PerimetroToraxMesoesternal'][i])},
+            {safe_float_convert(df['PerimetroCinturaMinima'][i])},
+            {safe_float_convert(df['PerimetroCaderaMaximo'][i])},
+            {safe_float_convert(df['PerimetroMusloMaximo'][i])},
+            {safe_float_convert(df['PerimetroMusloMedial'][i])},
+            {safe_float_convert(df['PerimetroPantorrillaMaxima'][i])},
+            {safe_float_convert(df['PlieguesTriceps'][i])},
+            {safe_float_convert(df['PlieguesSubescapular'][i])},
+            {safe_float_convert(df['PlieguesSupraespinal'][i])},
+            {safe_float_convert(df['PlieguesAbdominal'][i])},
+            {safe_float_convert(df['PlieguesMusloMedial'][i])},
+            {safe_float_convert(df['PlieguesPantorrilla'][i])},
+            {safe_float_convert(df['Bicipital'][i])},
+            {safe_float_convert(df['Supracrestideo'][i])},
+            {safe_float_convert(df['Sumatoria 6 pliegues'][i])},
+            {safe_float_convert(df['Sumatoria 8 pliegues'][i])},
+            {safe_float_convert(df['MasaPielKg'][i])},
+            {safe_float_convert(df['MasaPielPer'][i])},
+            {safe_float_convert(df['MasaAdiposaKg'][i])},
+            {safe_float_convert(df['MasaAdiposaPer'][i])},
+            {safe_float_convert(df['MasaMuscularKg'][i])},
+            {safe_float_convert(df['MasaMuscularPer'][i])},
+            {safe_float_convert(df['MasaResidualKg'][i])},
+            {safe_float_convert(df['MasaResidualPer'][i])},
+            {safe_float_convert(df['MasaOseaKg'][i])},
+            {safe_float_convert(df['MasaOseaPer'][i])},
+            {safe_float_convert(df['IMO'][i])},
+            {safe_float_convert(df['IAM'][i])},
+            {safe_string_convert(df['ObjetivoGeneral'][i])},
+            {safe_float_convert(df['ObjetivoEspecifico'][i])},
+            {safe_string_convert(df['Comentarios'][i])}
+        WHERE EXISTS (
+            SELECT 1 FROM jugador WHERE id_jugador = {safe_int_convert(df['IdJugador'][i])}
+        )           
+        AND EXISTS (
+            SELECT 1 FROM posicion WHERE id_posicion = {safe_int_convert(df['IdPosicion'][i])}
+        )
         ON CONFLICT (id_evaluacion) DO UPDATE
         SET jugador_id = EXCLUDED.jugador_id,
             posicion_id = EXCLUDED.posicion_id,
@@ -171,6 +171,7 @@ def convertir_csv_a_sql_antropometria():
             objetivo_especifico = EXCLUDED.objetivo_especifico,
             comentarios = EXCLUDED.comentarios;
         """
+
         lista_query.append(query)
     
     # Escribir las consultas SQL generadas en un archivo .sql
