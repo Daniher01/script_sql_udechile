@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime
+import re
 
 def convertir_csv_a_sql_antropometria():
     """
@@ -31,7 +32,8 @@ def convertir_csv_a_sql_antropometria():
         def safe_string_convert(value):
             if value is None or pd.isna(value):
                 return 'NULL'
-            return f"'{value}'"
+            clean_value = re.sub(r"'", "", str(value))
+            return f"'{clean_value}'"
 
         def safe_int_convert(value):
             try:
@@ -115,7 +117,12 @@ def convertir_csv_a_sql_antropometria():
 {safe_string_convert(df['ObjetivoGeneral'][i])},
 {safe_float_convert(df['ObjetivoEspecifico'][i])},
 {safe_string_convert(df['Comentarios'][i])})
-
+    WHERE EXISTS (
+        SELECT 1 FROM jugador WHERE id_jugador = {safe_int_convert(df['IdJugador'][i])}
+    )           
+    AND EXISTS (
+        SELECT 1 FROM posicion WHERE id_posicion = {safe_int_convert(df['IdPosicion'][i])}
+    )
         ON CONFLICT (id_evaluacion) DO UPDATE
         SET jugador_id = EXCLUDED.jugador_id,
             posicion_id = EXCLUDED.posicion_id,
