@@ -66,7 +66,7 @@ def convertir_csv_a_sql_examenes():
 
     
     # Escribir las consultas SQL generadas en un archivo .sql
-    with open(output_path, 'w') as f:
+    with open(output_path, 'w', encoding='utf-8') as f:
         for query in lista_query:
             f.write(query + '\n')
 

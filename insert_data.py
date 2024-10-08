@@ -11,8 +11,8 @@ if __name__ == "__main__":
         # convertir_csv_a_sql_jugadorInscripcion()
         # convertir_csv_a_sql_antropometria()
         # convertir_sql_hoja_diaria()
-        # convertir_csv_a_sql_examenes()
-        convertir_csv_a_sql_molestias()
+        convertir_csv_a_sql_examenes()
+        # convertir_csv_a_sql_molestias()
     except (RuntimeError, TypeError, NameError, BaseException) as e:
         print('ocurrio el siguiente error: ')
         print(e)
