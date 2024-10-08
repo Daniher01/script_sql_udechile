@@ -2,7 +2,7 @@ import pandas as pd
 from datetime import datetime
 
 
-def convertir_cev_a_sql_examenes():
+def convertir_csv_a_sql_examenes():
     """
     Convierte los datos del CSV en datos de SQL generando un nuevo archivo .sql
     """

@@ -77,7 +77,7 @@ def convertir_sql_hoja_diaria():
 
     
     # Escribir las consultas SQL generadas en un archivo .sql
-    with open(output_path, 'w') as f:
+    with open(output_path, 'w', encoding='utf-8') as f:
         for query in lista_query:
             f.write(query + '\n')
 
