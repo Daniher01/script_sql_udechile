@@ -38,7 +38,7 @@ Instala las dependencias utilizando el archivo requirements.txt con el siguiente
 
 Descarga los archivos CSV que contienen los datos a procesar.
 
-Guarda estos archivos en la carpeta llamada archivos csv del proyecto. *(ver en ```archivos csv/data.txt``` como deberian ser los nombre sde los archivos )*
+Guarda estos archivos en la carpeta llamada archivos csv del proyecto. *(ver en ```archivos csv/data.txt``` como deberian ser los nombres de los archivos .csv )*
 
 ###### Paso 5: Ejecutar el Código
 

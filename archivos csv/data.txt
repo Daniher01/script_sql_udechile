@@ -1,0 +1,11 @@
+Nombres que deben tener los archivos CSV para poder funcionar sin problemas
+
+- Antropometria.csv
+- Examenes.csv
+- Hoja_diaria.csv
+- Jugador_Inscripcion.csv
+- Jugador.csv
+- Lesiones.csv
+- Medicamentos.csv
+- Medicamentos.csv
+- wellness.csv
