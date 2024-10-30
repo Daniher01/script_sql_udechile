@@ -11,17 +11,19 @@ from querys.lesiones import convertir_csv_a_sql_lesion
 from querys.wellness import convertir_csv_a_sql_wellness
 
 def mostrar_menu():
+    print("Convertir de CSV a SQL")
     print("Seleccione una opción:")
-    print("1. Convertir CSV a SQL de Jugador")
-    print("2. Convertir CSV a SQL de Jugador Inscripción")
-    print("3. Convertir CSV a SQL de Antropometría")
-    print("4. Convertir CSV a SQL de Hoja Diaria")
-    print("5. Convertir CSV a SQL de Exámenes")
-    print("6. Convertir CSV a SQL de Molestias")
-    print("7. Convertir CSV a SQL de Medicamentos")
-    print("8. Convertir CSV a SQL de Lesiones")
-    print("9. Convertir CSV a SQL de Wellness")
+    print("1. Jugador")
+    print("2. Jugador Inscripción")
+    print("3. Antropometría")
+    print("4. Hoja Diaria")
+    print("5. Exámenes")
+    print("6. Molestias")
+    print("7. Medicamentos")
+    print("8. Lesiones")
+    print("9. Wellness")
     print("0. Salir")
+
 
 def ejecutar_opcion(opcion):
     if opcion == '1':

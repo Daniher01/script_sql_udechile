@@ -22,8 +22,8 @@ def convertir_csv_a_sql_medicamentos():
     
     # Reemplazar NaN en el DataFrame con None para representar NULL
     df = df.where(pd.notna(df), None)
-    print(df)
-    print("------------------")
+    #print(df)
+    #print("------------------")
     
     lista_query = []
     
@@ -77,4 +77,5 @@ def convertir_csv_a_sql_medicamentos():
         for query in lista_query:
             f.write(query + '\n')
 
-    print('Archivo convertido con éxito')
+    print('Archivo convertido con éxito en: ', output_path)
+    print('----------------------------------------------')

@@ -61,7 +61,5 @@ def convertir_csv_a_sql_wellness():
         for query in lista_query:
             f.write(query + '\n')
 
-    print('Archivo convertido con éxito')
-
-# Llamada a la función para realizar la conversión
-convertir_csv_a_sql_wellness()
+    print('Archivo convertido con éxito en: ', output_path)
+    print('----------------------------------------------')
