@@ -49,7 +49,7 @@ def convertir_sql_hoja_diaria():
                 {'NULL' if df['NombreJugador'][i] is None else f"'{df['NombreJugador'][i]}'"},
                 {'NULL' if df['Causa Intervención'][i] is None else f"'{df['Causa Intervención'][i]}'"},
                 {'NULL' if df['Tipo Intervención'][i] is None else f"'{df['Tipo Intervención'][i]}'"},
-                {'NULL' if df['Comentarios'][i] is None else f"'{df['Comentarios'][i]}'"},
+                {'NULL' if df['Comentarios'][i] is None else f"'{df['Comentarios'][i].replace(chr(39), '')}'"},
                 {'NULL' if df['Tratamiento/Músculo'][i] is None else f"'{df['Tratamiento/Músculo'][i]}'"},
                 {'NULL' if df['Tratamiento/Lateralidad'][i] is None else f"'{df['Tratamiento/Lateralidad'][i]}'"},
                 {'NULL' if df['Color'][i] is None else f"'{df['Color'][i]}'"},
@@ -70,6 +70,7 @@ def convertir_sql_hoja_diaria():
                 Color = EXCLUDED.Color,
                 Evaluador = EXCLUDED.Evaluador;
         """
+
 
 
 
