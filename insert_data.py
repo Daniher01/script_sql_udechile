@@ -9,6 +9,7 @@ from querys.molestias import convertir_csv_a_sql_molestias
 from querys.medicamentos import convertir_csv_a_sql_medicamentos
 from querys.lesiones import convertir_csv_a_sql_lesion
 from querys.wellness import convertir_csv_a_sql_wellness
+from querys.rendimiento import convertir_csv_a_sql_rendimiento
 
 def mostrar_menu():
     print("Convertir de CSV a SQL")
@@ -22,6 +23,7 @@ def mostrar_menu():
     print("7. Medicamentos")
     print("8. Lesiones")
     print("9. Wellness")
+    print("10. Rendimiento")
     print("0. Salir")
 
 
@@ -44,6 +46,8 @@ def ejecutar_opcion(opcion):
         convertir_csv_a_sql_lesion()
     elif opcion == '9':
         convertir_csv_a_sql_wellness()
+    elif opcion == '10':
+        convertir_csv_a_sql_rendimiento()
     elif opcion == '0':
         print("Saliendo del programa...")
         sys.exit(0)
