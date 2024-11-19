@@ -62,11 +62,11 @@ def convertir_csv_a_sql_rendimiento():
             )
             VALUES (
                 {i+1},
-                {f"'{df['Jugador'][i].replace(chr(39), ' ')}'" if df['Jugador'][i] else 'NULL'},
-                {f"'{df['Equipo'][i].replace(chr(39), ' ')}'" if df['Equipo'][i] else 'NULL'},
-                {f"'{df['Equipo durante el período seleccionado'][i].replace(chr(39), ' ')}'" if df['Equipo durante el período seleccionado'][i] else 'NULL'},
-                {f"'{df['Posición específica'][i].replace(chr(39), ' ')}'" if df['Posición específica'][i] else 'NULL'},
-                {df['Edad'][i] if df['Edad'][i] else 'NULL'},
+                {f"'{df['Jugador'][i].replace(chr(39), ' ')}'" if not pd.isna(df['Jugador'][i]) else 'NULL'},
+                {f"'{df['Equipo'][i].replace(chr(39), ' ')}'" if not pd.isna(df['Equipo'][i]) else 'NULL'},
+                {f"'{df['Equipo durante el período seleccionado'][i].replace(chr(39), ' ')}'" if not pd.isna(df['Equipo durante el período seleccionado'][i]) else 'NULL'},
+                {f"'{df['Posición específica'][i].replace(chr(39), ' ')}'" if not pd.isna(df['Posición específica'][i]) else 'NULL'},
+                {df['Edad'][i] if not pd.isna(df['Edad'][i]) else 'NULL'},
                 {float(str(df['Valor de mercado (Transfermarkt)'][i]).replace(',', '.')) if df['Valor de mercado (Transfermarkt)'][i] else 'NULL'},
                 {f"'{df['Vencimiento contrato'][i]}'" if df['Vencimiento contrato'][i] else 'NULL'},
                 {df['Partidos jugados'][i] if df['Partidos jugados'][i] else 'NULL'},

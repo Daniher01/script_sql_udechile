@@ -1,2 +1,3 @@
 archivos csv/*.csv
 archivos sql/*.sql
+*.pyc
