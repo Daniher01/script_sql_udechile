@@ -32,16 +32,14 @@ def convertir_csv_a_sql_examenes():
             INSERT INTO examenes (
                 id_examen, 
                 jugador_id, 
-                nombre_jugador, 
                 nombre_examen, 
-                unidad_medida, 
+                unidad, 
                 valor, 
                 fecha_examen
             ) 
             SELECT
                 {df['Id Examen'][i] if df['Id Examen'][i] is not None else 'NULL'},
                 {int(df['Id Jugador'][i]) if pd.notna(df['Id Jugador'][i]) else 'NULL'},
-                {'NULL' if df['Nombre Jugador'][i] is None else f"'{df['Nombre Jugador'][i]}'"},
                 {'NULL' if df['Nombre examen'][i] is None else f"'{df['Nombre examen'][i]}'"},
                 {'NULL' if df['Unidad de Medida'][i] is None else f"'{df['Unidad de Medida'][i]}'"},
                 {float(df['Valor'][i].replace(',', '.')) if pd.notna(df['Valor'][i]) else 'NULL'},
@@ -52,9 +50,8 @@ def convertir_csv_a_sql_examenes():
             ON CONFLICT (id_examen) DO UPDATE
             SET 
                 jugador_id = EXCLUDED.jugador_id,
-                nombre_jugador = EXCLUDED.nombre_jugador,
                 nombre_examen = EXCLUDED.nombre_examen,
-                unidad_medida = EXCLUDED.unidad_medida,
+                unidad = EXCLUDED.unidad,
                 valor = EXCLUDED.valor,
                 fecha_examen = EXCLUDED.fecha_examen;
         """
