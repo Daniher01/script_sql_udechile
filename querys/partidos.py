@@ -52,7 +52,7 @@ def convertir_csv_a_sql_partidos():
                 {'NULL' if df['IsLocal'][i] is None else f"'{df['IsLocal'][i]}'"},
                 {'NULL' if df['IsWon'][i] is None else f"'{df['IsWon'][i]}'"},
                 {'NULL' if df['NombreEvento'][i] is None else f"'{df['NombreEvento'][i].replace(chr(39), ' ')}'"},
-                {df['Jornada'][i] if pd.notna(df['Jornada'][i]) else 'NULL'},
+                {'No Registrado' if pd.isna(df['Jornada'][i]) else f"'{df['Jornada'][i]}'"},
                 {'NULL' if df['Abreviación'][i] is None else f"'{df['Abreviación'][i].replace(chr(39), ' ')}'"}
             )
             ON CONFLICT (id_partido) DO UPDATE
