@@ -40,8 +40,8 @@ def convertir_csv_a_sql_citaciones():
             ) 
             SELECT
                 {df['IdCitacion'][i] if df['IdCitacion'][i] is not None else 'NULL'},
-                {df['IdCT'][i] if df['IdCT'][i] is not None else 'NULL'},
-                {df['IdPartido'][i] if df['IdPartido'][i] is not None else 'NULL'},
+                {df['IdCT'][i] if pd.notna(df['IdCT'][i]) else 'NULL'},
+                {df['IdPartido'][i] if pd.notna(df['IdPartido'][i]) else 'NULL'},
                 {jugador_id},
                 {'NULL' if df['Estado'][i] is None else f"'{df['Estado'][i]}'"},
                 {posicion_id}
