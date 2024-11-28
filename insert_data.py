@@ -12,6 +12,7 @@ from querys.wellness import convertir_csv_a_sql_wellness
 from querys.rendimiento import convertir_csv_a_sql_rendimiento
 from querys.evaluacion_partido import convertir_csv_a_sql_evaluacion_partido
 from querys.citaciones import convertir_csv_a_sql_citaciones
+from querys.partidos import convertir_csv_a_sql_partidos
 
 
 def mostrar_menu():
@@ -29,6 +30,7 @@ def mostrar_menu():
     print("10. Rendimiento")
     print("11. Evaluacion Partidos")
     print("12. Citaciones")
+    print("13. Partidos")
     print("0. Salir")
 
 
@@ -57,6 +59,8 @@ def ejecutar_opcion(opcion):
         convertir_csv_a_sql_evaluacion_partido()
     elif opcion == '12':
         convertir_csv_a_sql_citaciones()
+    elif opcion == '13':
+        convertir_csv_a_sql_partidos()
     elif opcion == '0':
         print("Saliendo del programa...")
         sys.exit(0)
@@ -76,3 +80,4 @@ if __name__ == "__main__":
 
             print('Ocurrió el siguiente error: ')
             print(e)
+            sys.exit(0)
