@@ -24,6 +24,11 @@ def convertir_csv_a_sql_citaciones():
             (SELECT id_posicion FROM posicion WHERE nombre = '{df['Posicion'][i]}' LIMIT 1)
         """ if pd.notna(df['Posicion'][i]) else 'NULL'
 
+        jugador_id = f"""
+        (SELECT id_jugador FROM jugador WHERE id_jugador = {df['IdJugador'][i]} LIMIT 1)
+        """ if pd.notna(df['IdJugador'][i]) else 'NULL'
+
+        # Si no se encuentra el jugador, el registro no se incluirá
         query = f"""
             INSERT INTO citaciones (
                 id_citaciones, 
@@ -33,13 +38,15 @@ def convertir_csv_a_sql_citaciones():
                 estado, 
                 posicion_id
             ) 
-            VALUES (
+            SELECT
                 {df['IdCitacion'][i] if df['IdCitacion'][i] is not None else 'NULL'},
                 {df['IdCT'][i] if df['IdCT'][i] is not None else 'NULL'},
                 {df['IdPartido'][i] if df['IdPartido'][i] is not None else 'NULL'},
-                {df['IdJugador'][i] if df['IdJugador'][i] is not None else 'NULL'},
+                {jugador_id},
                 {'NULL' if df['Estado'][i] is None else f"'{df['Estado'][i]}'"},
                 {posicion_id}
+            WHERE EXISTS (
+                SELECT 1 FROM jugador WHERE id_jugador = {df['IdJugador'][i] if pd.notna(df['IdJugador'][i]) else 'NULL'}
             )
             ON CONFLICT (id_citaciones) DO UPDATE
             SET 
