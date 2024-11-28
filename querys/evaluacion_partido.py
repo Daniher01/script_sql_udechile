@@ -30,7 +30,7 @@ def convertir_csv_a_sql_evaluacion_partido():
             INSERT INTO evaluacion_partido (
                 id_evaluacion, 
                 partido_id, 
-                categoria_id, 
+                competicion_temporada_id, 
                 evaluador_id, 
                 fecha_evaluacion, 
                 jugador_id, 
@@ -48,13 +48,13 @@ def convertir_csv_a_sql_evaluacion_partido():
                 {df['IdJugador'][i] if df['IdJugador'][i] is not None else 'NULL'},
                 {'NULL' if df['Condicion'][i] is None else f"'{df['Condicion'][i]}'"},
                 {df['IdPosicion'][i] if df['IdPosicion'][i] is not None else 'NULL'},
-                {df['Nota'][i] if pd.notna(df['Nota'][i]) else 'NULL'},
+                {df['Nota'][i].replace(",", ".") if pd.notna(df['Nota'][i]) else 'NULL'},
                 {'NULL' if df['Comentario'][i] is None else f"'{df['Comentario'][i].replace(chr(39), ' ')}'"}
             )
             ON CONFLICT (id_evaluacion) DO UPDATE
             SET 
                 partido_id = EXCLUDED.partido_id,
-                categoria_id = EXCLUDED.categoria_id,
+                competicion_temporada_id = EXCLUDED.competicion_temporada_id,
                 evaluador_id = EXCLUDED.evaluador_id,
                 fecha_evaluacion = EXCLUDED.fecha_evaluacion,
                 jugador_id = EXCLUDED.jugador_id,
