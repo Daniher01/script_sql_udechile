@@ -12,7 +12,7 @@ def convertir_csv_a_sql_citaciones():
     # Leer el CSV
     df = pd.read_csv(input_path, sep=separador)
 
-    df = df[df['IdCitacion'] > 18000]
+    # df = df[(df['IdCitacion'] > 1) & (df['IdCitacion'] < 2000)]
 
     # Reemplazar NaN en el DataFrame con None para representar NULL en SQL
     df = df.where(pd.notna(df), None)
@@ -44,12 +44,9 @@ def convertir_csv_a_sql_citaciones():
                 {df['IdCitacion'][i] if df['IdCitacion'][i] is not None else 'NULL'},
                 {df['IdCT'][i] if pd.notna(df['IdCT'][i]) else 'NULL'},
                 {df['IdPartido'][i] if pd.notna(df['IdPartido'][i]) else 'NULL'},
-                {jugador_id},
+                {df['IdJugador'][i] if pd.notna(df['IdJugador'][i]) else 'NULL'},
                 {'NULL' if df['Estado'][i] is None else f"'{df['Estado'][i]}'"},
                 {posicion_id}
-            WHERE EXISTS (
-                SELECT 1 FROM jugador WHERE id_jugador = {df['IdJugador'][i] if pd.notna(df['IdJugador'][i]) else 'NULL'}
-            )
             ON CONFLICT (id_citaciones) DO UPDATE
             SET 
                 competicion_temporada_id = EXCLUDED.competicion_temporada_id,
