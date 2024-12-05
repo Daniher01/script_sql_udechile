@@ -6,12 +6,13 @@ def convertir_csv_a_sql_partidos():
     """
     Convierte los datos del CSV en datos de SQL generando un nuevo archivo .sql
     """
-    input_path = 'archivos csv/Partidos.csv'  # Ruta al CSV de entrada
+    input_path = 'archivos csv/Partido.csv'  # Ruta al CSV de entrada
     output_path = 'archivos sql/partidos.sql'  # Ruta al archivo SQL de salida
     separador = ','  # Ajusta el separador si es necesario
 
-    df = pd.read_csv(input_path, sep=separador)
-    df = df[df['IdPartido'] > 730]
+    df = pd.read_csv(input_path, sep=separador,
+                     na_values=['', 'NULL', 'None', ' '])
+    # df = df[df['IdPartido'] > 523] 
 
     # Convertir fechas al formato adecuado, manejando NaN, valores vacíos y diferentes formatos
     df['FechaPartido'] = df['FechaPartido'].str.strip().replace('', None)
@@ -19,6 +20,11 @@ def convertir_csv_a_sql_partidos():
         lambda x: datetime.strptime(x, "%d/%m/%Y").strftime("%Y-%m-%d") if pd.notna(x) and isinstance(x, str) and '/' in x
         else datetime.strptime(x, "%d-%m-%Y").strftime("%Y-%m-%d") if pd.notna(x) and isinstance(x, str) and '-' in x
         else None
+    )
+
+    # Fusionar manualmente las columnas problemáticas en una sola
+    df['Abreviación'] = df[['Abreviación', 'Unnamed: 12', 'Unnamed: 13']].apply(
+        lambda x: ','.join(x.dropna().astype(str).str.strip()), axis=1
     )
 
     # Reemplazar NaN en el DataFrame con None para representar NULL
@@ -50,10 +56,10 @@ def convertir_csv_a_sql_partidos():
                 {df['GolesLocal'][i] if pd.notna(df['GolesLocal'][i]) else 'NULL'},
                 {df['GolesVisita'][i] if pd.notna(df['GolesVisita'][i]) else 'NULL'},
                 {df['IdCompeticionTemporada'][i] if pd.notna(df['IdCompeticionTemporada'][i]) else 'NULL'},
-                {'NULL' if df['IsLocal'][i] is None else f"'{df['IsLocal'][i]}'"},
-                {'NULL' if df['IsWon'][i] is None else f"'{df['IsWon'][i]}'"},
+                {'NULL' if pd.isna(df['IsLocal'][i]) else f"'{df['IsLocal'][i]}'"},
+                {'NULL' if pd.isna(df['IsWon'][i]) else f"'{df['IsWon'][i]}'"},
                 {'NULL' if df['NombreEvento'][i] is None else f"'{df['NombreEvento'][i].replace(chr(39), ' ')}'"},
-                {'No Registrado' if pd.isna(df['Jornada'][i]) else f"'{df['Jornada'][i]}'"},
+                {"'No Registrado'" if pd.isna(df['Jornada'][i]) else f"'{df['Jornada'][i]}'"},
                 {'NULL' if df['Abreviación'][i] is None else f"'{df['Abreviación'][i].replace(chr(39), ' ')}'"}
             )
             ON CONFLICT (id_partido) DO UPDATE
