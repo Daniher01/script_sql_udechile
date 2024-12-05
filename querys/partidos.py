@@ -26,9 +26,17 @@ def convertir_csv_a_sql_partidos():
     df['Abreviación'] = df[['Abreviación', 'Unnamed: 12', 'Unnamed: 13']].apply(
         lambda x: ','.join(x.dropna().astype(str).str.strip()), axis=1
     )
+    
+    # Convertir valores a booleanos
+    df['IsLocal'] = df['IsLocal'].apply(
+        lambda x: True if x == 1 else False if x == 0 else None
+    )
+    df['IsWon'] = df['IsWon'].apply(
+        lambda x: True if x == 1 else False if x == 0 else None
+    )
 
     # Reemplazar NaN en el DataFrame con None para representar NULL
-    df = df.where(pd.notna(df), None)
+    df = df.where(pd.notna(df), None) 
 
     lista_query = []
 
@@ -56,8 +64,8 @@ def convertir_csv_a_sql_partidos():
                 {df['GolesLocal'][i] if pd.notna(df['GolesLocal'][i]) else 'NULL'},
                 {df['GolesVisita'][i] if pd.notna(df['GolesVisita'][i]) else 'NULL'},
                 {df['IdCompeticionTemporada'][i] if pd.notna(df['IdCompeticionTemporada'][i]) else 'NULL'},
-                {'NULL' if pd.isna(df['IsLocal'][i]) else f"'{df['IsLocal'][i]}'"},
-                {'NULL' if pd.isna(df['IsWon'][i]) else f"'{df['IsWon'][i]}'"},
+                {df['IsLocal'][i] if df['IsLocal'][i] is not None else 'NULL'},
+                {df['IsWon'][i] if df['IsWon'][i] is not None else 'NULL'},
                 {'NULL' if df['NombreEvento'][i] is None else f"'{df['NombreEvento'][i].replace(chr(39), ' ')}'"},
                 {"'No Registrado'" if pd.isna(df['Jornada'][i]) else f"'{df['Jornada'][i]}'"},
                 {'NULL' if df['Abreviación'][i] is None else f"'{df['Abreviación'][i].replace(chr(39), ' ')}'"}
