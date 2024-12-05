@@ -12,7 +12,7 @@ def convertir_csv_a_sql_citaciones():
     # Leer el CSV
     df = pd.read_csv(input_path, sep=separador)
 
-    # df = df[(df['IdCitacion'] > 1) & (df['IdCitacion'] < 2000)]
+    df = df[(df['IdCitacion'] > 8000) & (df['IdCitacion'] < 12000)]
 
     # Reemplazar NaN en el DataFrame con None para representar NULL en SQL
     df = df.where(pd.notna(df), None)
