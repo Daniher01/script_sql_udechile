@@ -12,6 +12,8 @@ def convertir_csv_a_sql_citaciones():
     # Leer el CSV
     df = pd.read_csv(input_path, sep=separador)
 
+    df = df[df['IdCitacion'] > 18000]
+
     # Reemplazar NaN en el DataFrame con None para representar NULL en SQL
     df = df.where(pd.notna(df), None)
 

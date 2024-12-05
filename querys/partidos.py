@@ -11,6 +11,7 @@ def convertir_csv_a_sql_partidos():
     separador = ','  # Ajusta el separador si es necesario
 
     df = pd.read_csv(input_path, sep=separador)
+    df = df[df['IdPartido'] > 730]
 
     # Convertir fechas al formato adecuado, manejando NaN, valores vacíos y diferentes formatos
     df['FechaPartido'] = df['FechaPartido'].str.strip().replace('', None)
