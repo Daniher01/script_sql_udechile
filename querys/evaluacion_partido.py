@@ -46,7 +46,7 @@ def convertir_csv_a_sql_evaluacion_partido():
                 {df['IdCT'][i] if df['IdCT'][i] is not None else 'NULL'},
                 {df['IdEvaluador'][i] if df['IdEvaluador'][i] is not None else 'NULL'},
                 {'NULL' if df['FechaEvaluacion'][i] is None else f"'{df['FechaEvaluacion'][i]}'"},
-                {df['IdJugador'][i] if df['IdJugador'][i] is not None else 'NULL'},
+                {df['IdJugador'][i] if not pd.isna(df['IdJugador'][i]) else 'NULL'}
                 {'NULL' if df['Condicion'][i] is None else f"'{df['Condicion'][i]}'"},
                 {df['IdPosicion'][i] if df['IdPosicion'][i] is not None else 'NULL'},
                 {df['Nota'][i].replace(",", ".") if pd.notna(df['Nota'][i]) else 'NULL'},
