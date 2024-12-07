@@ -11,7 +11,7 @@ def convertir_csv_a_sql_evaluacion_partido():
     separador = ','  # Ajusta el separador si es necesario
 
     df = pd.read_csv(input_path, sep=separador)
-    df = df[(df['IdEvaluacionPartido'] > 12080) & (df['IdEvaluacionPartido'] < 12700)]
+    # df = df[(df['IdEvaluacionPartido'] >= 7000) & (df['IdEvaluacionPartido'] < 14000)]
 
     # Convertir fechas al formato adecuado, manejando NaN y diferentes formatos
     df['FechaEvaluacion'] = df['FechaEvaluacion'].apply(
