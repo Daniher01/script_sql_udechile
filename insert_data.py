@@ -13,6 +13,7 @@ from querys.rendimiento import convertir_csv_a_sql_rendimiento
 from querys.evaluacion_partido import convertir_csv_a_sql_evaluacion_partido
 from querys.citaciones import convertir_csv_a_sql_citaciones
 from querys.partidos import convertir_csv_a_sql_partidos
+from querys.estadistica_interna import convertir_csv_a_sql_estadistica_interna
 
 
 def mostrar_menu():
@@ -31,6 +32,7 @@ def mostrar_menu():
     print("11. Evaluacion Partidos")
     print("12. Citaciones")
     print("13. Partidos")
+    print("14. Estadistica Interna")
     print("0. Salir")
 
 
@@ -61,6 +63,8 @@ def ejecutar_opcion(opcion):
         convertir_csv_a_sql_citaciones()
     elif opcion == '13':
         convertir_csv_a_sql_partidos()
+    elif opcion == '14':
+        convertir_csv_a_sql_estadistica_interna()
     elif opcion == '0':
         print("Saliendo del programa...")
         sys.exit(0)
