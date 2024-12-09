@@ -10,6 +10,7 @@ def convertir_csv_a_sql_estadistica_interna():
 
     # Leer el archivo CSV
     df = pd.read_csv(input_path, sep=separador)
+    # df = df[(df['IdEstadisticaPartido'] >= 14222) & (df['IdEstadisticaPartido'] < 16000)]
 
     # Reemplazar NaN o valores vacíos con 0
     df = df.fillna(0)
