@@ -85,4 +85,5 @@ if __name__ == "__main__":
 
             print('Ocurrió el siguiente error: ')
             print(e)
+        finally:
             sys.exit(0)

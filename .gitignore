@@ -2,3 +2,4 @@ archivos csv/*.csv
 archivos sql/*.sql
 */__pycache__/
 __pycache__/
+.env
