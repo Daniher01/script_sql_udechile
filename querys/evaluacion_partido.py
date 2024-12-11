@@ -72,3 +72,15 @@ def convertir_csv_a_sql_evaluacion_partido():
             f.write(query + '\n')
 
     print('Archivo convertido con éxito en:', output_path)
+
+
+    """Despues de ingresado los datos en la BBDD, 
+    ejecutar este script para asociar los registros a las citaciones correspondientes
+    
+    UPDATE evaluacion_partido
+    SET citacion_id = citaciones.id_citaciones
+    FROM citaciones
+    WHERE evaluacion_partido.partido_id = citaciones.partido_id
+    AND evaluacion_partido.jugador_id = citaciones.jugador_id
+    AND evaluacion_partido.competicion_temporada_id = citaciones.competicion_temporada_id;
+    """
