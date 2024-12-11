@@ -17,6 +17,7 @@ from querys.estadistica_interna import convertir_csv_a_sql_estadistica_interna
 
 
 def mostrar_menu():
+    print(" ")
     print("Convertir de CSV a SQL")
     print("Seleccione una opción:")
     print("1. Jugador")

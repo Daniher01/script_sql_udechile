@@ -1,4 +1,5 @@
 import pandas as pd
+import ejecutar_sql_script
 
 def convertir_csv_a_sql_estadistica_interna():
     """
@@ -11,6 +12,7 @@ def convertir_csv_a_sql_estadistica_interna():
 
     # Leer el archivo CSV
     df = pd.read_csv(input_path, sep=separador)
+    df = df[(df['IdEstadisticaPartido'] >= 5000) & (df['IdEstadisticaPartido'] < 16000)]
 
     # Reemplazar NaN o valores vacíos con 0
     df = df.fillna(0)
@@ -58,4 +60,18 @@ def convertir_csv_a_sql_estadistica_interna():
             f.write(query + '\n')
 
     print('Archivo convertido con éxito en:', output_path)
+    
+    # Llamar al script auxiliar para ejecutar el archivo SQL
+    ejecutar_sql_script.ejecutar_sql(output_path, "estadistica_interna")
 
+
+    """Despues de ingresado los datos en la BBDD, 
+    ejecutar este script para asociar los registros a las citaciones correspondientes
+    
+    UPDATE estadistica_interna
+    SET citaciones_id = citaciones.id_citaciones
+    FROM citaciones
+    WHERE estadistica_interna.partido_id = citaciones.partido_id
+    AND estadistica_interna.jugador_id = citaciones.jugador_id
+    AND estadistica_interna.competicion_temporada_id = citaciones.competicion_temporada_id;
+    """
