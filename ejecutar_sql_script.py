@@ -25,7 +25,8 @@ def ejecutar_sql(output_path, table_name):
             "-h", host,  # Pasar host sin formato innecesario
             "-U", user,
             "-d", database,
-            "-f", output_path
+            "-f", output_path,
+            "--set", "ON_ERROR_STOP=on"  # Detenerse al primer error
         ]
 
         # Iniciar medición de tiempo
@@ -51,6 +52,8 @@ def ejecutar_sql(output_path, table_name):
 
         # Contar INSERTs y UPDATEs
         total_inserts = output.count('INSERT')
+        
+        #print(result)
 
         # Mostrar resultado
         if result.returncode == 0:

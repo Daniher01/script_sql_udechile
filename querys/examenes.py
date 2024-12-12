@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime
+import ejecutar_sql_script
 
 
 def convertir_csv_a_sql_examenes():
@@ -12,6 +13,8 @@ def convertir_csv_a_sql_examenes():
     separador = ','  # Ajusta el separador si es necesario
     
     df = pd.read_csv(input_path, sep=separador)
+    
+    df = df[(df['Id Examen'] >= 700) & (df['Id Examen'] < 800)]
     
     # Convertir fechas al formato adecuado, manejando NaN y diferentes formatos
     df['Fecha Examen'] = df['Fecha Examen'].apply(
@@ -68,4 +71,7 @@ def convertir_csv_a_sql_examenes():
             f.write(query + '\n')
 
     print('Archivo convertido con éxito en: ', output_path)
-    print('----------------------------------------------')
+
+    
+    # Llamar al script auxiliar para ejecutar el archivo SQL
+    ejecutar_sql_script.ejecutar_sql(output_path, "examenes")
