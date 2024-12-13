@@ -14,7 +14,7 @@ def convertir_sql_hoja_diaria():
     
     df = pd.read_csv(input_path, sep=separador)
     
-    df = df[(df['IdRegistro'] >= 4000) & (df['IdRegistro'] < 5000)]
+    #df = df[(df['IdRegistro'] >= 8000) & (df['IdRegistro'] < 8100)]
     
     # Convertir fechas al formato adecuado, manejando NaN y diferentes formatos
     df['Fecha'] = df['Fecha'].apply(
@@ -29,6 +29,8 @@ def convertir_sql_hoja_diaria():
     #print("------------------")
     
     lista_query = []
+    
+    id_indice = 1
     
     for i in df.index:
         query = f"""
@@ -46,7 +48,7 @@ def convertir_sql_hoja_diaria():
                 evaluador_id
             ) 
             SELECT
-                {df['IdRegistro'][i] if df['IdRegistro'][i] is not None else 'NULL'},
+                {id_indice},
                 {'NULL' if df['Fecha'][i] is None else f"'{df['Fecha'][i]}'"},
                 {int(df['IdJugador'][i]) if pd.notna(df['IdJugador'][i]) else 'NULL'},
                 {'NULL' if df['NombreJugador'][i] is None else f"'{df['NombreJugador'][i]}'"},
@@ -78,7 +80,7 @@ def convertir_sql_hoja_diaria():
         """
 
 
-
+        id_indice += 1
 
 
         lista_query.append(query)
