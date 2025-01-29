@@ -14,7 +14,7 @@ def convertir_csv_a_sql_antropometria():
     
     df = pd.read_csv(input_path, sep=separador, decimal='.')
     
-    df = df[(df['IdEvaluacion'] >= 1900) & (df['IdEvaluacion'] < 2000)]
+    df = df[(df['IdEvaluacion'] >= 2010) & (df['IdEvaluacion'] < 2100)]
     
     # Convertir fechas al formato adecuado, manejando NaN
     df['FechaEvaluacion'] = df['FechaEvaluacion'].apply(
