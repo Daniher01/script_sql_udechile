@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime
+import ejecutar_sql_script
 
 
 def convertir_csv_a_sql_rendimiento():
@@ -8,7 +9,7 @@ def convertir_csv_a_sql_rendimiento():
     """
     input_path = 'archivos csv/Rendimiento.csv'  # Ruta del CSV de entrada
     output_path = 'archivos sql/rendimiento.sql'  # Ruta del SQL de salida
-    separador = ','  # Cambiar si el separador del CSV es diferente
+    separador = ';'  # Cambiar si el separador del CSV es diferente
     
     df = pd.read_csv(input_path, sep=separador)
     
@@ -64,7 +65,7 @@ def convertir_csv_a_sql_rendimiento():
                 corneres_p90, penaltis_a_favor, penaltis_realizados_porcentaje, anio
             )
             VALUES (
-                {id_referencia+1},
+                {id_referencia+i},
                 {f"'{df['Jugador'][i].replace(chr(39), ' ')}'" if not pd.isna(df['Jugador'][i]) else 'NULL'},
                 {f"'{df['Equipo'][i].replace(chr(39), ' ')}'" if not pd.isna(df['Equipo'][i]) else 'NULL'},
                 {f"'{df['Equipo durante el período seleccionado'][i].replace(chr(39), ' ')}'" if not pd.isna(df['Equipo durante el período seleccionado'][i]) else 'NULL'},
@@ -300,7 +301,7 @@ def convertir_csv_a_sql_rendimiento():
                 tiros_libres_directos_porcentaje = EXCLUDED.tiros_libres_directos_porcentaje,
                 corneres_p90 = EXCLUDED.corneres_p90,
                 penaltis_a_favor = EXCLUDED.penaltis_a_favor,
-                penaltis_realizados_porcentaje = EXCLUDED.penaltis_realizados_porcentaje
+                penaltis_realizados_porcentaje = EXCLUDED.penaltis_realizados_porcentaje,
                 anio = EXCLUDED.anio;
 
         """
@@ -313,4 +314,4 @@ def convertir_csv_a_sql_rendimiento():
             f.write(query + '\n')
     
     print('Archivo convertido con éxito en:', output_path)
-    print('----------------------------------------------')
+    ejecutar_sql_script.ejecutar_sql(output_path, "rendimiento")
