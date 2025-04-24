@@ -1,6 +1,7 @@
 import pandas as pd
 from datetime import datetime
 import re
+import ejecutar_sql_script
 
 def convertir_csv_a_sql_antropometria():
     """
@@ -11,7 +12,9 @@ def convertir_csv_a_sql_antropometria():
     output_path = 'archivos sql/antropometria.sql'
     separador = ','# Detectar la codificación del archivo
     
-    df = pd.read_csv(input_path, sep=separador, decimal='.', encoding='ISO-8859-1')
+    df = pd.read_csv(input_path, sep=separador, decimal='.')
+    
+    df = df[(df['IdEvaluacion'] >= 2010) & (df['IdEvaluacion'] < 2100)]
     
     # Convertir fechas al formato adecuado, manejando NaN
     df['FechaEvaluacion'] = df['FechaEvaluacion'].apply(
@@ -117,12 +120,6 @@ def convertir_csv_a_sql_antropometria():
             {safe_string_convert(df['ObjetivoGeneral'][i])},
             {safe_float_convert(df['ObjetivoEspecifico'][i])},
             {safe_string_convert(df['Comentarios'][i])}
-        WHERE EXISTS (
-            SELECT 1 FROM jugador WHERE id_jugador = {safe_int_convert(df['IdJugador'][i])}
-        )           
-        AND EXISTS (
-            SELECT 1 FROM posicion WHERE id_posicion = {safe_int_convert(df['IdPosicion'][i])}
-        )
         ON CONFLICT (id_evaluacion) DO UPDATE
         SET jugador_id = EXCLUDED.jugador_id,
             posicion_id = EXCLUDED.posicion_id,
@@ -180,4 +177,6 @@ def convertir_csv_a_sql_antropometria():
             f.write(query + '\n')
 
     print('Archivo convertido con éxito en: ', output_path)
-    print('----------------------------------------------')
+        
+    # Llamar al script auxiliar para ejecutar el archivo SQL
+    ejecutar_sql_script.ejecutar_sql(output_path, "antropometria")

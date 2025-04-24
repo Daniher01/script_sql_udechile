@@ -1,3 +1,5 @@
 archivos csv/*.csv
 archivos sql/*.sql
-querys/__pycache__/
+*/__pycache__/
+__pycache__/
+.env

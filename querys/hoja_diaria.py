@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime
+import ejecutar_sql_script
 
 
 def convertir_sql_hoja_diaria():
@@ -12,6 +13,8 @@ def convertir_sql_hoja_diaria():
     separador = ','  # Ajusta el separador si es necesario
     
     df = pd.read_csv(input_path, sep=separador)
+    
+    #df = df[(df['IdRegistro'] >= 8000) & (df['IdRegistro'] < 8100)]
     
     # Convertir fechas al formato adecuado, manejando NaN y diferentes formatos
     df['Fecha'] = df['Fecha'].apply(
@@ -27,6 +30,8 @@ def convertir_sql_hoja_diaria():
     
     lista_query = []
     
+    id_indice = 1
+    
     for i in df.index:
         query = f"""
             INSERT INTO hoja_diaria (
@@ -40,10 +45,10 @@ def convertir_sql_hoja_diaria():
                 TratamientoMusculo, 
                 TratamientoLateralidad, 
                 Color,
-                Evaluador
+                evaluador_id
             ) 
             SELECT
-                {df['IdRegistro'][i] if df['IdRegistro'][i] is not None else 'NULL'},
+                {id_indice},
                 {'NULL' if df['Fecha'][i] is None else f"'{df['Fecha'][i]}'"},
                 {int(df['IdJugador'][i]) if pd.notna(df['IdJugador'][i]) else 'NULL'},
                 {'NULL' if df['NombreJugador'][i] is None else f"'{df['NombreJugador'][i]}'"},
@@ -53,10 +58,13 @@ def convertir_sql_hoja_diaria():
                 {'NULL' if df['Tratamiento/Músculo'][i] is None else f"'{df['Tratamiento/Músculo'][i]}'"},
                 {'NULL' if df['Tratamiento/Lateralidad'][i] is None else f"'{df['Tratamiento/Lateralidad'][i]}'"},
                 {'NULL' if df['Color'][i] is None else f"'{df['Color'][i]}'"},
-                {'NULL' if df['Evaluador'][i] is None else f"'{df['Evaluador'][i]}'"}
-            WHERE EXISTS (
-                SELECT 1 FROM jugador WHERE id_jugador = {int(df['IdJugador'][i]) if pd.notna(df['IdJugador'][i]) else 'NULL'}
-            )
+                (
+                    SELECT id_evaluador 
+                    FROM evaluador 
+                    WHERE nombre = '{df['Evaluador'][i]}'
+                    LIMIT 1
+                ) 
+                {'NULL' if df['Evaluador'][i] is None else ''}
             ON CONFLICT (IdRegistro) DO UPDATE
             SET 
                 Fecha = EXCLUDED.Fecha,
@@ -68,10 +76,11 @@ def convertir_sql_hoja_diaria():
                 TratamientoMusculo = EXCLUDED.TratamientoMusculo,
                 TratamientoLateralidad = EXCLUDED.TratamientoLateralidad,
                 Color = EXCLUDED.Color,
-                Evaluador = EXCLUDED.Evaluador;
+                evaluador_id = EXCLUDED.evaluador_id;
         """
 
 
+        id_indice += 1
 
 
         lista_query.append(query)
@@ -83,4 +92,7 @@ def convertir_sql_hoja_diaria():
             f.write(query + '\n')
 
     print('Archivo convertido con éxito en: ', output_path)
-    print('----------------------------------------------')
+
+
+    # Llamar al script auxiliar para ejecutar el archivo SQL
+    ejecutar_sql_script.ejecutar_sql(output_path, "hoja_diaria")

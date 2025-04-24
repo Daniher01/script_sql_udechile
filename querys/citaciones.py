@@ -1,5 +1,5 @@
 import pandas as pd
-
+import ejecutar_sql_script
 
 def convertir_csv_a_sql_citaciones():
     """
@@ -12,7 +12,7 @@ def convertir_csv_a_sql_citaciones():
     # Leer el CSV
     df = pd.read_csv(input_path, sep=separador)
 
-    df = df[(df['IdCitacion'] >= 32) & (df['IdCitacion'] < 33)]
+    df = df[(df['IdCitacion'] >= 18700) & (df['IdCitacion'] < 19000)]
 
     # Reemplazar NaN en el DataFrame con None para representar NULL en SQL
     df = df.where(pd.notna(df), None)
@@ -64,3 +64,6 @@ def convertir_csv_a_sql_citaciones():
             f.write(query + '\n')
 
     print('Archivo convertido con éxito en:', output_path)
+
+    # Llamar al script auxiliar para ejecutar el archivo SQL
+    ejecutar_sql_script.ejecutar_sql(output_path, "citaciones")
