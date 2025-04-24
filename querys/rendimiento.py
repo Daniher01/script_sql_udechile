@@ -29,6 +29,7 @@ def convertir_csv_a_sql_rendimiento():
     df = df.where(pd.notna(df), None)
     
     id_referencia = 468
+    anio = 2025
     
     # Lista para almacenar las consultas SQL generadas
     lista_query = []
@@ -60,7 +61,7 @@ def convertir_csv_a_sql_rendimiento():
                 goles_recibidos, goles_recibidos_p90, remates_en_contra, remates_en_contra_p90, porterias_imbatidas_en_los_90,
                 paradas_porcentaje, xg_en_contra, xg_en_contra_p90, goles_evitados, goles_evitados_p90, pases_hacia_atras_recibidos_del_arquero_p90,
                 salidas_p90, duelos_aereos_en_los_90_2, tiros_libres_p90, tiros_libres_directos_p90, tiros_libres_directos_porcentaje,
-                corneres_p90, penaltis_a_favor, penaltis_realizados_porcentaje
+                corneres_p90, penaltis_a_favor, penaltis_realizados_porcentaje, anio
             )
             VALUES (
                 {id_referencia+1},
@@ -178,7 +179,8 @@ def convertir_csv_a_sql_rendimiento():
                 {float(str(df['Tiros libres directos, %'][i]).replace(',', '.')) if df['Tiros libres directos, %'][i] else 'NULL'},
                 {float(str(df['Córneres/90'][i]).replace(',', '.')) if df['Córneres/90'][i] else 'NULL'},
                 {df['Penaltis a favor'][i] if df['Penaltis a favor'][i] else 'NULL'},
-                {float(str(df['Penaltis realizados, %'][i]).replace(',', '.')) if df['Penaltis realizados, %'][i] else 'NULL'}
+                {float(str(df['Penaltis realizados, %'][i]).replace(',', '.')) if df['Penaltis realizados, %'][i] else 'NULL'},
+                {anio}
             )
 
 
@@ -298,7 +300,8 @@ def convertir_csv_a_sql_rendimiento():
                 tiros_libres_directos_porcentaje = EXCLUDED.tiros_libres_directos_porcentaje,
                 corneres_p90 = EXCLUDED.corneres_p90,
                 penaltis_a_favor = EXCLUDED.penaltis_a_favor,
-                penaltis_realizados_porcentaje = EXCLUDED.penaltis_realizados_porcentaje;
+                penaltis_realizados_porcentaje = EXCLUDED.penaltis_realizados_porcentaje
+                anio = EXCLUDED.anio;
 
         """
         
