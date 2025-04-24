@@ -28,6 +28,8 @@ def convertir_csv_a_sql_rendimiento():
     # Reemplazar NaN en el DataFrame con None para representar NULL en SQL
     df = df.where(pd.notna(df), None)
     
+    id_referencia = 468
+    
     # Lista para almacenar las consultas SQL generadas
     lista_query = []
     
@@ -61,7 +63,7 @@ def convertir_csv_a_sql_rendimiento():
                 corneres_p90, penaltis_a_favor, penaltis_realizados_porcentaje
             )
             VALUES (
-                {i+1},
+                {id_referencia+1},
                 {f"'{df['Jugador'][i].replace(chr(39), ' ')}'" if not pd.isna(df['Jugador'][i]) else 'NULL'},
                 {f"'{df['Equipo'][i].replace(chr(39), ' ')}'" if not pd.isna(df['Equipo'][i]) else 'NULL'},
                 {f"'{df['Equipo durante el período seleccionado'][i].replace(chr(39), ' ')}'" if not pd.isna(df['Equipo durante el período seleccionado'][i]) else 'NULL'},
