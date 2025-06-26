@@ -14,6 +14,7 @@ from querys.evaluacion_partido import convertir_csv_a_sql_evaluacion_partido
 from querys.citaciones import convertir_csv_a_sql_citaciones
 from querys.partidos import convertir_csv_a_sql_partidos
 from querys.estadistica_interna import convertir_csv_a_sql_estadistica_interna
+from querys.uch_vs_iq import convertir_csv_a_sql_uch_vs_iq
 
 
 def mostrar_menu():
@@ -34,6 +35,7 @@ def mostrar_menu():
     print("12. Citaciones")
     print("13. Partidos")
     print("14. Estadistica Interna")
+    print("15. UCH vs IQ SportCode")
     print("0. Salir")
 
 
@@ -66,6 +68,8 @@ def ejecutar_opcion(opcion):
         convertir_csv_a_sql_partidos()
     elif opcion == '14':
         convertir_csv_a_sql_estadistica_interna()
+    elif opcion == '15':
+        convertir_csv_a_sql_uch_vs_iq()
     elif opcion == '0':
         print("Saliendo del programa...")
         sys.exit(0)
