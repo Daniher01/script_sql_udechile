@@ -17,6 +17,7 @@ from querys.estadistica_interna import convertir_csv_a_sql_estadistica_interna
 from querys.uch_vs_iq import convertir_csv_a_sql_uch_vs_iq
 from querys.jugador_sgs import convertir_csv_a_sql_jugadores_sgs
 from querys.evaluacion_general_sgs import convertir_csv_a_sql_evaluacion_general_sgs
+from querys.evaluacion_partido_sgs import convertir_csv_a_sql_evaluacion_partido_sgs
 
 
 def mostrar_menu():
@@ -40,6 +41,7 @@ def mostrar_menu():
     print("15. UCH vs IQ SportCode")
     print("16. Jugadores SGS")
     print("17. Evaluación General SGS")
+    print("18. Evaluación Partido SGS")
     print("0. Salir")
 
 
@@ -78,6 +80,8 @@ def ejecutar_opcion(opcion):
         convertir_csv_a_sql_jugadores_sgs()
     elif opcion == '17':
         convertir_csv_a_sql_evaluacion_general_sgs()
+    elif opcion == '18':
+        convertir_csv_a_sql_evaluacion_partido_sgs()
     elif opcion == '0':
         print("Saliendo del programa...")
         sys.exit(0)
